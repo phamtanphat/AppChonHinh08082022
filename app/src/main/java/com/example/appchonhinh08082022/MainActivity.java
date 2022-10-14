@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,9 +22,14 @@ public class MainActivity extends AppCompatActivity {
         imgRandom = findViewById(R.id.imgRandom);
         imgPick = findViewById(R.id.imgPick);
 
-        arrAnimals = getResources().getStringArray(R.array.array_animals);
-        int resourceImageRandom = getResources().getIdentifier(arrAnimals[1], "drawable", getPackageName());
-        imgRandom.setImageResource(resourceImageRandom);
+        randomImage();
+    }
 
+    private void randomImage() {
+        Random random = new Random();
+        arrAnimals = getResources().getStringArray(R.array.array_animals);
+        int indexRandom = random.nextInt(arrAnimals.length);
+        int resourceImageRandom = getResources().getIdentifier(arrAnimals[indexRandom], "drawable", getPackageName());
+        imgRandom.setImageResource(resourceImageRandom);
     }
 }
