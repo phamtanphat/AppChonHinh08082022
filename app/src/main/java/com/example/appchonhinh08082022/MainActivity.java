@@ -1,12 +1,18 @@
 package com.example.appchonhinh08082022;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -23,6 +29,24 @@ public class MainActivity extends AppCompatActivity {
         imgPick = findViewById(R.id.imgPick);
 
         randomImage();
+
+        Collections.shuffle(Arrays.asList(arrAnimals));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_refresh:
+                randomImage();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void randomImage() {
