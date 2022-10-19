@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 public class ListImageActivity extends AppCompatActivity {
 
@@ -28,6 +33,7 @@ public class ListImageActivity extends AppCompatActivity {
 
         if (arrAnimals == null || arrAnimals.length == 0) return;
 
+        Collections.shuffle(Arrays.asList(arrAnimals));
         int count = 0;
         int column = 3;
         int row = (int) Math.ceil(arrAnimals.length / 3);
@@ -38,6 +44,15 @@ public class ListImageActivity extends AppCompatActivity {
                 ImageView imageView = new ImageView(this);
                 int resourceImage = getResources().getIdentifier(arrAnimals[count], "drawable", getPackageName());
                 imageView.setImageResource(resourceImage);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent1 = new Intent();
+                        intent1.putExtra("resource", resourceImage);
+                        setResult(RESULT_OK, intent1);
+                        finish();
+                    }
+                });
                 tableRow.addView(imageView);
                 count++;
             }

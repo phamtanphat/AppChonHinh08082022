@@ -1,15 +1,18 @@
 package com.example.appchonhinh08082022;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     String[] arrAnimals;
     ImageView imgRandom, imgPick;
+    int REQUEST_CODE = 1;
+    int resourceImageRandom = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +45,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
                 intent.putExtra("array", arrAnimals);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
+            int resource = data.getIntExtra("resource", -1);
+            if (resource != -1) {
+                imgPick.setImageResource(resource);
+                if (resource == resourceImageRandom) {
+                    Toast.makeText(this, "Bạn đã chọn đúng", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Bạn đã chọn sai", Toast.LENGTH_SHORT).show();
+                }
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        randomImage();
+                    }
+                }, 1000);
+            }
+        }
     }
 
     @Override
@@ -65,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         Random random = new Random();
         arrAnimals = getResources().getStringArray(R.array.array_animals);
         int indexRandom = random.nextInt(arrAnimals.length);
-        int resourceImageRandom = getResources().getIdentifier(arrAnimals[indexRandom], "drawable", getPackageName());
+        resourceImageRandom = getResources().getIdentifier(arrAnimals[indexRandom], "drawable", getPackageName());
         imgRandom.setImageResource(resourceImageRandom);
     }
 }
