@@ -2,6 +2,7 @@ package com.example.appchonhinh08082022;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -18,7 +19,13 @@ public class ListImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_image);
 
         tableLayout = findViewById(R.id.table_layout);
-        arrAnimals = getResources().getStringArray(R.array.array_animals);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            arrAnimals = intent.getStringArrayExtra("array");
+        }
+
+        if (arrAnimals == null || arrAnimals.length == 0) return;
 
         int column = 3;
         int row = (int) Math.ceil(arrAnimals.length / 3);

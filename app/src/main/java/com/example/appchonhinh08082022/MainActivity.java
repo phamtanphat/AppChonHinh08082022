@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
         imgPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Children children = new Children("Tèo", "5");
                 Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
+                intent.putExtra("array", arrAnimals);
                 startActivity(intent);
             }
         });
