@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Children children = new Children("Tèo", "5");
                 Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
-                intent.putExtra("array", arrAnimals);
+//                intent.putExtra("array", arrAnimals);
+                intent.putExtra("object", children);
                 startActivity(intent);
             }
         });

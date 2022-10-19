@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,10 +23,11 @@ public class ListImageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            arrAnimals = intent.getStringArrayExtra("array");
+//            arrAnimals = intent.getStringArrayExtra("array");
+            Children children = (Children) intent.getSerializableExtra("object");
         }
 
-        if (arrAnimals == null || arrAnimals.length == 0) return;
+//        if (arrAnimals == null || arrAnimals.length == 0) return;
 
         int column = 3;
         int row = (int) Math.ceil(arrAnimals.length / 3);
