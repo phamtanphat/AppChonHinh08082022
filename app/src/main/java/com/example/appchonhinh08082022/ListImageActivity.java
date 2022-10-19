@@ -23,12 +23,12 @@ public class ListImageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-//            arrAnimals = intent.getStringArrayExtra("array");
-            Children children = (Children) intent.getSerializableExtra("object");
+            arrAnimals = intent.getStringArrayExtra("array");
         }
 
-//        if (arrAnimals == null || arrAnimals.length == 0) return;
+        if (arrAnimals == null || arrAnimals.length == 0) return;
 
+        int count = 0;
         int column = 3;
         int row = (int) Math.ceil(arrAnimals.length / 3);
 
@@ -36,8 +36,10 @@ public class ListImageActivity extends AppCompatActivity {
             TableRow tableRow = new TableRow(this);
             for (int j = 0; j < column; j++) {
                 ImageView imageView = new ImageView(this);
-                imageView.setImageResource(R.drawable.bo);
+                int resourceImage = getResources().getIdentifier(arrAnimals[count], "drawable", getPackageName());
+                imageView.setImageResource(resourceImage);
                 tableRow.addView(imageView);
+                count++;
             }
             tableLayout.addView(tableRow);
         }
