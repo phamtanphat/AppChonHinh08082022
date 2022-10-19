@@ -3,10 +3,12 @@ package com.example.appchonhinh08082022;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -29,8 +31,17 @@ public class MainActivity extends AppCompatActivity {
         imgPick = findViewById(R.id.imgPick);
 
         randomImage();
+        event();
+    }
 
-        Collections.shuffle(Arrays.asList(arrAnimals));
+    private void event() {
+        imgPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ListImageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
